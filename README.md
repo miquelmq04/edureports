@@ -20,7 +20,7 @@ Perquè el projecte funcioni idènticament en tots els ordinadors, cal tenir ins
 
 ### Programari Base
 - Laragon (Full): El servidor local principal.
-- Node.js (LTS): Necessari per al motor de Tailwind.
+- Node.js (LTS): Necessari per al motor de Tailwind amb npm (sol estar inclós).
 - GitHub Desktop: Per gestionar el codi de manera visual i senzilla.
 - VS Code: L'editor de codi oficial.
 
