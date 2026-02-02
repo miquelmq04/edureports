@@ -31,7 +31,7 @@ Perquè el projecte funcioni idènticament en tots els ordinadors, cal tenir ins
 
 ## 🚀 Configuració Inicial
 
-1. Clonar el projecte: Obre GitHub Desktop i clona el repositori a la carpeta `C:\laragon\www\edureports`.
+1. Clonar el projecte: Obre GitHub Desktop i clona el repositori a la carpeta `C:\laragon\www\edureports` (És a dir fer el /clone a la carpeta www).
 2. Instal·lar Tailwind: Obre una terminal a l'arrel del projecte i executa:
    ```bash
    npm install
