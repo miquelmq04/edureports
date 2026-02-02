@@ -38,6 +38,7 @@ Perquè el projecte funcioni idènticament en tots els ordinadors, cal tenir ins
    ```
 3. Base de Dades:
    - Obre Laragon i prem Start All.
+   - Configura el port de la base de dades al 3307 des de la configuració de Laragon.
    - Entra a HeidiSQL, crea una base de dades anomenada edureports.
    - Importa el fitxer .sql de la carpeta /database (si n'hi ha un).
 
