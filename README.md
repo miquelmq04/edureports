@@ -39,8 +39,8 @@ Perquè el projecte funcioni idènticament en tots els ordinadors, cal tenir ins
 3. Base de Dades:
    - Obre Laragon i prem Start All.
    - Configura el port de la base de dades al 3307 des de la configuració de Laragon.
-   - Des de l'extensió de vscode configura la connexió a la BD segons la variable $config["bd"] del fitxer config.php.
-   - Executa l'script per crear taules i omplir dades de prova que es troba /sql/init.sql.
+   - Des de l'extensió de vscode configura la connexió a la BD segons les dades a la variable `$config["bd"]` del fitxer `config.php`.
+   - Executa l'script per crear taules i omplir dades de prova que es troba `/sql/init.sql`.
 
 ## 🔄 Flux de Treball Diari
 
@@ -53,6 +53,7 @@ Perquè tot funcioni correctament mentre programes, segueix aquests 3 passos:
    ```
    (Això generarà el CSS automàticament cada vegada que guardis un fitxer PHP).
 3. Sincronitzar: Abans de tancar, fes Commit i Push a GitHub Desktop. Al matí, fes sempre Pull.
+4. Gestionar els conflictes i si cal contactar amb l'equip per solucionar (Amb GH Desktop es fàcil).
 
 ## 📂 Estructura de Carpetes
 
