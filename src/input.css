@@ -1,0 +1,15 @@
+/* src/input.css */
+
+@import "tailwindcss";
+
+/* Tailwind v4 escanejarà tots els fitxers .php dins d'app i public.
+   Això és el que fa que les classes "apareguin" al CSS final.
+*/
+
+@source "../app/**/*.php";
+@source "../public/**/*.php";
+
+/* A partir d'aquí pots posar els teus estils si vols fer servir @apply 
+   Exemple:
+   .btn-blau { @apply bg-blue-500 text-white p-2 rounded; }
+*/
