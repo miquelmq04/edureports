@@ -10,7 +10,7 @@ Hem seleccionat un stack centrat en la simplicitat i la potència. El nucli del 
 | ----------------- | ----------------- | -------------------------------------------------------------------- |
 | Backend           | PHP 8.2+         | Lògica de l'aplicació i rutes MVC.                                   |
 | Frontend          | Tailwind CSS v4   | Estils moderns (Utility-first) sense configuració pesada.            |
-| Base de Dades     | MySQL             | Emmagatzematge de dades (gestionat amb HeidiSQL).                   |
+| Base de Dades     | MySQL             | Emmagatzematge de dades (gestionat amb Vscode MySQL).                   |
 | Servidor Local    | Laragon           | Apache, PHP i MySQL "tot en un".                                    |
 | Control de Versions| Git + GitHub Desktop | Col·laboració entre l'equip.                                       |
 
@@ -39,8 +39,8 @@ Perquè el projecte funcioni idènticament en tots els ordinadors, cal tenir ins
 3. Base de Dades:
    - Obre Laragon i prem Start All.
    - Configura el port de la base de dades al 3307 des de la configuració de Laragon.
-   - Entra a HeidiSQL, crea una base de dades anomenada edureports.
-   - Importa el fitxer .sql de la carpeta /database (si n'hi ha un).
+   - Des de l'extensió de vscode configura la connexió a la BD segons la variable $config["bd"] del fitxer config.php.
+   - Executa l'script per crear taules i omplir dades de prova que es troba /sql/init.sql.
 
 ## 🔄 Flux de Treball Diari
 
