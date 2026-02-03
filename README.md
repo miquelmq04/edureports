@@ -70,6 +70,7 @@ Assegureu-vos de tenir un fitxer anomenat .gitignore a l'arrel amb el següent c
 node_modules/
 .env
 public/css/style.css.map
+public/css/style.css
 ```
 
 EduReports Team - Projecte de Desenvolupament d'Aplicacions Web.
