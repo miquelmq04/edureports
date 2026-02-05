@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Carregar la configuració
 $config = require '../config/config.php';
 
@@ -27,6 +30,12 @@ $router = new \App\Router();
 
 // Pàgina d'inici
 $router->get('/', ['App\\Controllers\\HomeController', 'index']);
+
+//Processar el formulari de home
+$router->post('/generate-report', ['App\\Controllers\\ReportController', 'processForm']);
+
+// Mostrar la pàgina on es genera l'informe
+$router->get('/write-report', ['App\\Controllers\\ReportController', 'showReport']);
 
 // Servir la ruta solicitada 
 $response = $router->dispatch();

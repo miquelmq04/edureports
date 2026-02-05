@@ -6,6 +6,7 @@
     <title>EduReports - Gestió Escolar</title>
     <!-- Enlace al CSS compilado en /public/css -->
     <link href="/css/styles.css" rel="stylesheet">
+    <script src="/js/funcions.js" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased">
     <nav class="bg-blue-600 p-4 text-white shadow-lg">

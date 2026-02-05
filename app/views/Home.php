@@ -51,17 +51,17 @@
                             <div class="text-xs font-mono text-gray-400">generador_ia.exe</div>
                         </div>
                         
-                        <div class="p-6 md:p-8 grid gap-6">
+                        <form method="POST" action="<?= base_url('generate-report') ?>" class="p-6 md:p-8 grid gap-6">
                             <!-- Input ràpid -->
                             <div class="space-y-4">
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'alumne</label>
-                                        <input type="text" class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-2.5 text-sm transition" placeholder="Ex: Maria">
+                                        <input type="text" name="student_name" class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-2.5 text-sm transition" placeholder="Ex: Maria" required>
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Curs</label>
-                                        <select class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                        <select name="course" class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
                                             <option>3r Primària</option>
                                             <option>4t Primària</option>
                                             <option>5è Primària</option>
@@ -72,7 +72,7 @@
                                 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Avaluació i Notes</label>
-                                    <div class="space-y-2">
+                                    <div id="evaluationItems" class="space-y-2">
                                         <div class="flex gap-2">
                                             <input type="text" class="w-2/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm" placeholder="Matèria/Competència" value="Matemàtiques">
                                             <select class="w-1/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm">
@@ -89,16 +89,16 @@
                                                 <option>Regular</option>
                                             </select>
                                         </div>
-                                        <button class="text-xs text-blue-600 font-medium hover:underline flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
-                                            Afegir ítem
-                                        </button>
                                     </div>
+                                    <button type="button" onclick="addEvaluationItem()" class="mt-2 text-xs text-blue-600 font-medium hover:underline flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                        Afegir ítem
+                                    </button>
                                 </div>
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Situacions observades</label>
-                                    <textarea class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-3 text-sm h-20 resize-none transition" placeholder="Ex: Es distreu parlant amb els companys. És molt creativa dibuixant."></textarea>
+                                    <textarea name="observations" class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-3 text-sm h-20 resize-none transition" placeholder="Ex: Es distreu parlant amb els companys. És molt creativa dibuixant."></textarea>
                                 </div>
 
                                 <!-- Funcions Pro (Bloquejades) -->
@@ -129,17 +129,17 @@
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Estil</label>
-                                    <select class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm">
+                                    <select name="style" class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm">
                                         <option>Empàtic i positiu</option>
                                         <option>Formal i tècnic</option>
                                     </select>
                                 </div>
 
-                                <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-lg shadow-lg transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-lg shadow-lg transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0 1 1 0 002 0zm-1 4a1 1 0 00-1 1v3a1 1 0 002 0v-3a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
                                     Generar Informe de Prova
                                 </button>
-                            </div>
+                            </form>
 
                             <!-- Resultat Simulat -->
                             <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
