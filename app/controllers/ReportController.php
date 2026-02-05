@@ -6,15 +6,8 @@ class ReportController
 {
     public function processForm($params = [])
     {
-        // 1. Guardar les dades del formulari a la sessió
-        $_SESSION['report_data'] = [
-            'student_name' => $_POST['student_name'] ?? 'Alumne sense nom',
-            'course' => $_POST['course'] ?? '',
-            'observations' => $_POST['observations'] ?? '',
-            'style' => $_POST['style'] ?? 'empatic'
-        ];
+        require_once __DIR__ . '/../models/LoadSessionDemoForm.php';
         
-        // 2. Redirigir a la pàgina de generació
         redirect('write-report');
     }
     

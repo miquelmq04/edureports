@@ -63,18 +63,18 @@ function initReportGeneration() {
     // Obtenir les dades des dels data attributes
     const container = document.getElementById('reportContainer');
     if (!container) return;
-    
+
     const studentName = container.dataset.studentName || 'l\'alumne/a';
     const course = container.dataset.course || '';
     const style = container.dataset.style || 'Empàtic i positiu';
-    
+
     // Seleccionar el text segons l'estil
     const reportTextFunction = reportTexts[style] || reportTexts['Empàtic i positiu'];
-    const reportText = typeof reportTextFunction === 'function' 
-        ? reportTextFunction(studentName, course) 
-        : reportTextFunction;
+    const reportText = typeof reportTextFunction === 'function' ?
+        reportTextFunction(studentName, course) :
+        reportTextFunction;
     const recommendationText = recommendations[style] || recommendations['Empàtic i positiu'];
-    
+
     // Simular generació amb delay de 3 segons
     setTimeout(() => {
         // Amagar loader
@@ -82,27 +82,27 @@ function initReportGeneration() {
         if (loader) {
             loader.classList.add('hidden');
         }
-        
+
         // Mostrar contingut
         const reportContent = document.getElementById('reportContent');
         if (reportContent) {
             reportContent.classList.remove('hidden');
         }
-        
+
         // Inserir el text generat
         const reportTextElement = document.getElementById('reportText');
         if (reportTextElement) {
             reportTextElement.innerHTML = reportText;
         }
-        
+
         const recommendationsElement = document.getElementById('recommendations');
         if (recommendationsElement) {
             recommendationsElement.innerHTML = recommendationText;
         }
-        
+
         // Scroll suau cap amunt
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
+
     }, 3000); // 3 segons de delay
 }
 
@@ -114,19 +114,86 @@ document.addEventListener('DOMContentLoaded', initReportGeneration);
  */
 function addEvaluationItem() {
     const container = document.getElementById('evaluationItems');
-    if (!container) return;
-    
-    const newItem = document.createElement('div');
-    newItem.className = 'flex gap-2';
-    newItem.innerHTML = `
-        <input type="text" class="w-2/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm" placeholder="Extra">
-        <select class="w-1/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm">
-            <option>Malament</option>
-            <option>Regular</option>
-            <option>Bo</option>
-            <option>Molt Bo</option>
-        </select>
+
+    // Creem l'HTML de la nova fila. 
+    // És idèntic al que ja tens, però amb 'eliminarItem(this)'
+    const newRow = `
+            <div class="flex items-center w-full gap-2 fade-in">
+                <input type="text" 
+                       name="eval_label[]" 
+                       class="flex-1 w-full min-w-0 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm focus:ring-purple-500 focus:bg-white transition" 
+                       placeholder="Nou ítem...">
+                
+                <input type="number" 
+                       name="eval_value[]" 
+                       min="0" max="10" 
+                       class="w-14 flex-shrink-0 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm text-center focus:ring-purple-500" 
+                       placeholder="0">
+                
+                <button type="button" 
+                        onclick="eliminarItem(this)" 
+                        class="cursor-pointer flex-shrink-0 p-1" 
+                        title="Eliminar ítem">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        class="h-4 w-4 text-red-600 hover:text-red-800 transition-colors" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
+            </div>
+        `;
+
+    // Afegim la nova fila al final del contenidor
+    container.insertAdjacentHTML('beforeend', newRow);
+
+    // Opcional: Posar el focus al nou input creat
+    const inputs = container.querySelectorAll('input[type="text"]');
+    inputs[inputs.length - 1].focus();
+}
+
+// Funció per eliminar la fila
+function eliminarItem(button) {
+    // Busquem el pare més proper que tingui la classe 'flex' (la fila sencera) i l'esborrem
+    const row = button.closest('.flex');
+    if (row) {
+        row.remove();
+    }
+}
+
+/**
+ * Afegir un nou ítem d'observació al formulari
+ */
+function addObservationItem() {
+    const container = document.getElementById('observationItems');
+
+    // HTML de la nova fila (sense input numèric)
+    const newRow = `
+        <div class="flex items-center w-full gap-2 fade-in">
+            <input type="text" 
+                   name="observations[]" 
+                   class="flex-1 w-full min-w-0 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm focus:ring-purple-500 focus:bg-white transition" 
+                   placeholder="Nova observació...">
+            
+            <button type="button" 
+                    onclick="eliminarItem(this)" 
+                    class="cursor-pointer flex-shrink-0 p-1" 
+                    title="Eliminar observació">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     class="h-4 w-4 text-red-600 hover:text-red-800 transition-colors" 
+                     fill="none" 
+                     viewBox="0 0 24 24" 
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+        </div>
     `;
-    
-    container.appendChild(newItem);
+
+    container.insertAdjacentHTML('beforeend', newRow);
+
+    // Posa el focus al nou input creat
+    const inputs = container.querySelectorAll('input[type="text"]');
+    inputs[inputs.length - 1].focus();
 }

@@ -1,24 +1,24 @@
 <link href="<?= base_url('css/styles.css') ?>" rel="stylesheet">
 <style>
-@keyframes progress {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
-.animate-progress {
-    animation: progress 3s ease-out forwards;
-}
+    @keyframes progress {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+    .animate-progress {
+        animation: progress 3s ease-out forwards;
+    }
 </style>
 
-<div id="reportContainer" 
-     data-student-name="<?= htmlspecialchars($reportData['student_name']) ?>"
-     data-course="<?= htmlspecialchars($reportData['course']) ?>"
-     data-style="<?= htmlspecialchars($reportData['style']) ?>"
-     class="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+<div id="reportContainer"
+    data-student-name="<?= htmlspecialchars($reportData['student_name']) ?>"
+    data-course="<?= htmlspecialchars($reportData['course']) ?>"
+    data-language="<?= htmlspecialchars($reportData['language']) ?>"
+    data-evaluations='<?= json_encode($reportData['evaluations']) ?>'
+    class="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    
     <div class="container mx-auto px-4 max-w-4xl">
-        
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            
-            <!-- ESTAT 1: Loader (visible al principi) -->
+
             <div id="loader" class="text-center py-20 px-8">
                 <div class="relative inline-block">
                     <div class="animate-spin rounded-full h-20 w-20 border-b-4 border-blue-600 mx-auto mb-6"></div>
@@ -31,28 +31,32 @@
                 <h3 class="text-2xl font-bold text-gray-900 mb-3">Generant el teu informe...</h3>
                 <p class="text-gray-600 mb-2">La nostra IA està redactant l'informe personalitzat per a <span class="font-semibold text-blue-600"><?= htmlspecialchars($reportData['student_name']) ?></span></p>
                 <p class="text-sm text-gray-400">Això pot trigar entre 3 i 5 segons</p>
-                
-                <!-- Barra de progrés animada -->
                 <div class="mt-8 max-w-md mx-auto">
                     <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-progress"></div>
                     </div>
                 </div>
             </div>
-            
-            <!-- ESTAT 2: Informe generat (ocult al principi) -->
+
             <div id="reportContent" class="hidden">
-                
-                <!-- Capçalera de l'informe -->
+
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8">
                     <div class="flex justify-between items-start">
                         <div>
                             <h2 class="text-3xl font-bold mb-2">Informe Pedagògic</h2>
                             <p class="text-blue-100 text-lg"><?= htmlspecialchars($reportData['student_name']) ?></p>
-                            <p class="text-blue-200 text-sm mt-1"><?= htmlspecialchars($reportData['course']) ?> · Generat el <?= date('d/m/Y') ?></p>
+                            
+                            <p class="text-blue-200 text-sm mt-1 flex items-center gap-2">
+                                <span><?= htmlspecialchars($reportData['course']) ?></span>
+                                <span>•</span>
+                                <span class="uppercase tracking-wider font-semibold bg-blue-500/30 px-2 py-0.5 rounded text-xs">
+                                    <?= htmlspecialchars(strtoupper($reportData['language'])) ?>
+                                </span>
+                                <span>•</span>
+                                <span>Generat el <?= date('d/m/Y') ?></span>
+                            </p>
                         </div>
-                        
-                        <!-- Botó descarregar (bloquejat) -->
+
                         <div class="relative group">
                             <button disabled class="px-6 py-3 bg-white/20 text-white/50 rounded-lg font-semibold cursor-not-allowed flex items-center gap-2 border-2 border-white/30">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,49 +70,69 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Contingut de l'informe -->
+
                 <div class="p-8">
                     <div class="prose max-w-none">
-                        
-                        <!-- Secció d'introducció -->
+
+                        <?php if (!empty($reportData['evaluations'])): ?>
+                        <div class="mb-8 border-b border-gray-100 pb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                                </svg>
+                                Resultats Avaluats
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                <?php foreach ($reportData['evaluations'] as $eval): ?>
+                                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 flex justify-between items-center">
+                                        <span class="text-sm font-medium text-gray-700 truncate mr-2" title="<?= htmlspecialchars($eval['label']) ?>">
+                                            <?= htmlspecialchars($eval['label']) ?>
+                                        </span>
+                                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white border border-blue-200 text-blue-700 font-bold text-sm shadow-sm">
+                                            <?= htmlspecialchars($eval['value']) ?>
+                                        </span>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                                 <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">1</span>
                                 Valoració General
                             </h3>
                             <div id="reportText" class="text-gray-700 leading-relaxed space-y-3">
-                                <!-- El text es generarà aquí amb JavaScript -->
-                            </div>
+                                </div>
                         </div>
-                        
-                        <!-- Secció d'observacions -->
+
                         <?php if (!empty($reportData['observations'])): ?>
-                        <div class="mb-8">
-                            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
-                                Observacions del Docent
-                            </h3>
-                            <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
-                                <p class="text-gray-700 italic">"<?= htmlspecialchars($reportData['observations']) ?>"</p>
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                    <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                                    Observacions del Docent
+                                </h3>
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
+                                    <ul class="list-disc list-inside text-gray-700 italic">
+                                        <?php foreach ($reportData['observations'] as $observation): ?>
+                                            <li>"<?= htmlspecialchars($observation) ?>"</li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
                         <?php endif; ?>
-                        
-                        <!-- Secció de recomanacions -->
+
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                                 <span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold">3</span>
                                 Recomanacions
                             </h3>
                             <div id="recommendations" class="text-gray-700 leading-relaxed">
-                                <!-- Recomanacions generades per IA -->
-                            </div>
+                                </div>
                         </div>
-                        
+
                     </div>
-                    
-                    <!-- Banner de Demo -->
+
                     <div class="mt-12 bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-8 text-center text-white">
                         <h4 class="text-2xl font-bold mb-2">T'ha agradat la demo? 🚀</h4>
                         <p class="text-gray-300 mb-6">Amb la versió completa pots personalitzar plantilles, entrenar la IA amb el teu estil i descarregar en format Word/PDF.</p>
@@ -122,11 +146,9 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
         </div>
-        
     </div>
 </div>
 
