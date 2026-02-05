@@ -54,27 +54,85 @@
                         <div class="p-6 md:p-8 grid gap-6">
                             <!-- Input ràpid -->
                             <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Què vols destacar de l'alumne?</label>
-                                    <textarea class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-3 text-sm h-24 resize-none transition" placeholder="Ex: La Maria ha millorat molt en matemàtiques, però es distreu parlant amb els companys. És molt creativa."></textarea>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'alumne</label>
+                                        <input type="text" class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-2.5 text-sm transition" placeholder="Ex: Maria">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Curs</label>
+                                        <select class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                            <option>3r Primària</option>
+                                            <option>4t Primària</option>
+                                            <option>5è Primària</option>
+                                            <option>6è Primària</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 
-                                <div class="flex gap-4">
-                                    <div class="w-1/2">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Matèria</label>
-                                        <select class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm">
-                                            <option>Global</option>
-                                            <option>Matemàtiques</option>
-                                            <option>Llengua</option>
-                                        </select>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Avaluació i Notes</label>
+                                    <div class="space-y-2">
+                                        <div class="flex gap-2">
+                                            <input type="text" class="w-2/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm" placeholder="Matèria/Competència" value="Matemàtiques">
+                                            <select class="w-1/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm">
+                                                <option>Assoliment Excel·lent</option>
+                                                <option>Assoliment Notable</option>
+                                                <option>Assoliment Satisfactori</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <input type="text" class="w-2/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm" placeholder="Matèria/Competència" value="Comportament">
+                                            <select class="w-1/3 rounded-lg border-gray-200 bg-gray-50 p-2 text-sm">
+                                                <option>Molt bo</option>
+                                                <option>Bo</option>
+                                                <option>Regular</option>
+                                            </select>
+                                        </div>
+                                        <button class="text-xs text-blue-600 font-medium hover:underline flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                            Afegir ítem
+                                        </button>
                                     </div>
-                                    <div class="w-1/2">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Estil</label>
-                                        <select class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm">
-                                            <option>Empàtic i positiu</option>
-                                            <option>Formal i tècnic</option>
-                                        </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Situacions observades</label>
+                                    <textarea class="w-full rounded-lg border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent p-3 text-sm h-20 resize-none transition" placeholder="Ex: Es distreu parlant amb els companys. És molt creativa dibuixant."></textarea>
+                                </div>
+
+                                <!-- Funcions Pro (Bloquejades) -->
+                                <div class="relative group rounded-lg">
+                                    <div class="absolute inset-0 bg-white/40 z-10 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-200 hover:bg-white/20 transition-colors">
+                                        <div class="bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 transform group-hover:scale-105 transition cursor-not-allowed">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                                            Només versió completa
+                                        </div>
                                     </div>
+                                    <div class="space-y-3 opacity-75 filter grayscale pointer-events-none select-none p-1">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Entrenament IA (El teu estil)</label>
+                                            <div class="border border-gray-300 rounded-lg p-2.5 bg-gray-50 flex items-center justify-between">
+                                                <span class="text-xs text-gray-500">Pujar informes antics...</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Plantilla de l'informe</label>
+                                            <div class="border border-gray-300 rounded-lg p-2.5 bg-gray-50 flex items-center justify-between">
+                                                <span class="text-xs text-gray-500">Seleccionar arxiu .docx</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Estil</label>
+                                    <select class="w-full rounded-lg border-gray-200 bg-gray-50 p-2.5 text-sm">
+                                        <option>Empàtic i positiu</option>
+                                        <option>Formal i tècnic</option>
+                                    </select>
                                 </div>
 
                                 <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-lg shadow-lg transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
