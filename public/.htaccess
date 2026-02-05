@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Evita que Apache redirigeixi visualment si existeix una carpeta amb el mateix nom
+DirectorySlash Off
+Options -MultiViews
+
+# Si no és un fitxer real (com un .css o .jpg)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# REGLA CLAU: index.php sense barra davant i amb [L]
+# Això diu a Apache: "Executa index.php però no ho diguis al navegador"
+RewriteRule ^ index.php [QSA,L]

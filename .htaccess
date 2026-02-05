@@ -1,26 +1,9 @@
-# .htaccess - redirige todo a /public
-# Este archivo fuerza que todas las peticiones se sirvan desde la carpeta /public
+RewriteEngine On
 
-<IfModule mod_rewrite.c>
-    # Ejecuta las reglas de reescritura solo si el módulo mod_rewrite está activo
-    # (evita errores en servidores donde no esté habilitado)
-    RewriteEngine On
+# 1. Si demanes l'arrel pura, anem a public/
+RewriteRule ^$ public/ [L]
 
-    # Evita bucle si la solicitud ya apunta a /public/
-    # %{REQUEST_URI} contiene la ruta solicitada por el cliente (por ejemplo: /about)
-    # La condición siguiente comprueba que la URI NO empiece por /public/
-    RewriteCond %{REQUEST_URI} !^/public/
-
-    # Reescribe cualquier URL hacia /public/<lo-que-se-pidió>
-    # ^(.*)$ captura toda la ruta solicitada y la coloca en $1
-    # Las flags significan:
-    #   L  -> Last: si coincide, deja de procesar más reglas
-    #   NC -> No Case: coincidencia sin distinguir mayúsculas/minúsculas
-    #   QSA-> Query String Append: añade la query string original a la nueva URL
-    RewriteRule ^(.*)$ /public/$1 [L,NC,QSA]
-</IfModule>
-
-# Nota: Esta configuración realiza una reescritura interna a /public,
-# no una redirección externa visible al navegador. Si prefieres que el
-# navegador sea redirigido (cambie la URL en la barra del navegador),
-# habría que usar un flag R=301 en la regla.
+# 2. Si la ruta NO comença per /public/, hi afegim el prefix internament
+# Important: NO posem [R] i NO posem "/" inicial a la destinació
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]

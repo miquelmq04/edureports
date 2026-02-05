@@ -1,33 +1,34 @@
 <?php
+// Carregar la configuració
+$config = require '../config/config.php';
 
-$config = require __DIR__ . '/../config/config.php';
+// Autoloader simple
+spl_autoload_register(function ($class) {
+    $prefix = 'App\\';
+    $base_dir = __DIR__ . '/../app/';
 
-// 1. Importem la classe de la base de dades
-require_once '../app/models/Database.php';
-
-try {
-    // 2. Obtenim la connexió (el Singleton s'encarrega de tot)
-    $db = Database::getConnection();
-
-    // 3. Executem la consulta
-    // Fem servir query() directament perquè no hi ha variables externes (és segur)
-    $stmt = $db->query("SELECT nombre FROM usuarios");
-    
-    // 4. Obtenim tots els resultats en un array
-    $usuaris = $stmt->fetchAll();
-
-    // 5. Mostrem els noms per pantalla
-    echo "<h2>Llista de Professors:</h2>";
-    if ($usuaris) {
-        foreach ($usuaris as $usuari) {
-            echo "👤 Nom: " . $usuari['nombre'] . "<br>";
+    if (strncmp($class, $prefix, strlen($prefix)) === 0) {
+        $relative_class = substr($class, strlen($prefix));
+        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+        
+        if (file_exists($file)) {
+            require $file;
         }
-    } else {
-        echo "No hi ha usuaris a la base de dades.";
     }
+});
 
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-}
+// Carregar helpers
+require '../app/helpers.php';
 
-require_once '../app/views/header.php';
+// Crear router
+$router = new \App\Router();
+
+// ==================== RUTES ====================
+
+// Pàgina d'inici
+$router->get('/', ['App\\Controllers\\HomeController', 'index']);
+
+// Servir la ruta solicitada 
+$response = $router->dispatch();
+echo $response;
+?>
