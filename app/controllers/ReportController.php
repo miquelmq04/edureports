@@ -7,9 +7,13 @@ class ReportController
     public function processForm($params = [])
     {
         require_once __DIR__ . '/../models/LoadSessionDemoForm.php';
-        
-        redirect('write-report');
+        $reportData = $_SESSION['report_data'] ?? null;
+        echo view('GeneratingReport',[
+            'reportData' => $reportData
+        ]);
     }
+
+    
     
     public function showReport($params = [])
     {

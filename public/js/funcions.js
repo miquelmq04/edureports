@@ -60,55 +60,18 @@ const recommendations = {
  * Inicia la generació de l'informe
  */
 function initReportGeneration() {
-    // Obtenir les dades des dels data attributes
-    const container = document.getElementById('reportContainer');
-    if (!container) return;
-
-    const studentName = container.dataset.studentName || 'l\'alumne/a';
-    const course = container.dataset.course || '';
-    const style = container.dataset.style || 'Empàtic i positiu';
-
-    // Seleccionar el text segons l'estil
-    const reportTextFunction = reportTexts[style] || reportTexts['Empàtic i positiu'];
-    const reportText = typeof reportTextFunction === 'function' ?
-        reportTextFunction(studentName, course) :
-        reportTextFunction;
-    const recommendationText = recommendations[style] || recommendations['Empàtic i positiu'];
-
-    // Simular generació amb delay de 3 segons
-    setTimeout(() => {
-        // Amagar loader
-        const loader = document.getElementById('loader');
-        if (loader) {
-            loader.classList.add('hidden');
-        }
-
-        // Mostrar contingut
-        const reportContent = document.getElementById('reportContent');
-        if (reportContent) {
-            reportContent.classList.remove('hidden');
-        }
-
-        // Inserir el text generat
-        const reportTextElement = document.getElementById('reportText');
-        if (reportTextElement) {
-            reportTextElement.innerHTML = reportText;
-        }
-
-        const recommendationsElement = document.getElementById('recommendations');
-        if (recommendationsElement) {
-            recommendationsElement.innerHTML = recommendationText;
-        }
-
-        // Scroll suau cap amunt
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    }, 3000); // 3 segons de delay
+    if (document.getElementById('loadingContainer')) {
+        alert('Generant l\'informe... Aquest procés pot trigar uns segons.');
+        // TODO: Cridar a un controlador PHP que simuli la generació de l'informe (amb sleep) i retorni el resultat
+        // Treure la barra de carrega
+        setTimeout(() => {
+            window.location.href = 'write-report';
+        }, 3000); // 3 segons de delay
+    }
 }
 
 // Iniciar quan el document estigui carregat
 document.addEventListener('DOMContentLoaded', initReportGeneration);
-
 /**
  * Afegir un nou ítem d'avaluació al formulari
  */
