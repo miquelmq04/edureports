@@ -37,3 +37,4 @@
     </div>
 </div>
 <script src="<?= base_url('js/funcions.js') ?>"></script>
+<script> document.addEventListener('DOMContentLoaded', initReportGeneration) </script>

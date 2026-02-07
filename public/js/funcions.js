@@ -70,8 +70,6 @@ function initReportGeneration() {
     }
 }
 
-// Iniciar quan el document estigui carregat
-document.addEventListener('DOMContentLoaded', initReportGeneration);
 /**
  * Afegir un nou ítem d'avaluació al formulari
  */
