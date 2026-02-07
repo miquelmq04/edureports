@@ -60,7 +60,7 @@ const recommendations = {
  * Inicia la generació de l'informe
  */
 async function initReportGeneration() {
-    alert('Generant informe... Aquesta operació pot trigar uns segons.'); // Opcional: Notificar a l'usuari que s'està generant l'informe
+    //alert('Generant informe... Aquesta operació pot trigar uns segons.'); // Opcional: Notificar a l'usuari que s'està generant l'informe
     if (document.getElementById('loadingContainer')) {
         try {
             // 1. Hacemos el FETCH a la URL (puede ser un archivo PHP, API, etc.)
@@ -77,7 +77,7 @@ async function initReportGeneration() {
             console.error('Hubo un problema:', error);
             document.getElementById('loadingContainer').innerHTML = "<span style='color:red'>Error: " + error.message + "</span>";
         }
-        alert('Informe generat amb èxit!'); // Puedes eliminar esta alerta si no quieres una notificación
+        //alert('Informe generat amb èxit!'); // Puedes eliminar esta alerta si no quieres una notificación
         window.location.href = "http://edureports.test/generated-report";
     }
 }
