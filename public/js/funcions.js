@@ -59,14 +59,26 @@ const recommendations = {
 /**
  * Inicia la generació de l'informe
  */
-function initReportGeneration() {
+async function initReportGeneration() {
+    alert('Generant informe... Aquesta operació pot trigar uns segons.'); // Opcional: Notificar a l'usuari que s'està generant l'informe
     if (document.getElementById('loadingContainer')) {
-        alert('Generant l\'informe... Aquest procés pot trigar uns segons.');
-        // TODO: Cridar a un controlador PHP que simuli la generació de l'informe (amb sleep) i retorni el resultat
-        // Treure la barra de carrega
-        setTimeout(() => {
-            window.location.href = 'write-report';
-        }, 3000); // 3 segons de delay
+        try {
+            // 1. Hacemos el FETCH a la URL (puede ser un archivo PHP, API, etc.)
+            // Cambia 'https://api.ipify.org?format=json' por tu URL real
+            const url = document.getElementById('loadingContainer').dataset.url;
+            const response = await fetch("http://edureports.test/generate-report");
+
+            // 2. Verificamos si la respuesta fue correcta (Status 200-299)
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.status);
+            }
+        } catch (error) {
+            // 5. Manejo de errores (si falla internet o la URL no existe)
+            console.error('Hubo un problema:', error);
+            document.getElementById('loadingContainer').innerHTML = "<span style='color:red'>Error: " + error.message + "</span>";
+        }
+        alert('Informe generat amb èxit!'); // Puedes eliminar esta alerta si no quieres una notificación
+        window.location.href = "http://edureports.test/generated-report";
     }
 }
 

@@ -37,6 +37,8 @@ $router->post('/generate-report', ['App\\Controllers\\ReportController', 'proces
 // Mostrar la pàgina on es genera l'informe
 $router->get('/write-report', ['App\\Controllers\\ReportController', 'showReport']);
 
+$router->get('/generate-report', ['App\\Controllers\\ReportController', 'generateReport']);
+
 // Servir la ruta solicitada 
 $response = $router->dispatch();
 echo $response;

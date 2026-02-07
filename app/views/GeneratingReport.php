@@ -9,9 +9,9 @@
     }
 </style>
 
-<div id="loadingContainer" class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
     
-    <div class="w-full max-w-md text-center space-y-4">
+    <div id="loadingContainer" url="<?= base_url('generate-report') ?>" class="w-full max-w-md text-center space-y-4">
         
         <div class="relative inline-block w-20 h-20 mx-auto">
             <div class="animate-spin rounded-full h-20 w-20 border-b-4 border-blue-600"></div>
