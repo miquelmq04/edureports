@@ -13,7 +13,7 @@ spl_autoload_register(function ($class) {
     if (strncmp($class, $prefix, strlen($prefix)) === 0) {
         $relative_class = substr($class, strlen($prefix));
         $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-        
+
         if (file_exists($file)) {
             require $file;
         }
@@ -22,6 +22,16 @@ spl_autoload_register(function ($class) {
 
 // Carregar helpers
 require '../app/helpers.php';
+// 1. Cargar el autoloader
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+// 2. Cargar el .env desde el directorio PADRE
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+// --- Resto de tu código ---
 
 // Crear router
 $router = new \App\Router();
@@ -41,4 +51,3 @@ $router->get('/generated-report', ['App\\Controllers\\ReportController', 'showRe
 // Servir la ruta solicitada 
 $response = $router->dispatch();
 echo $response;
-?>

@@ -1,13 +1,14 @@
 <?php
 return [
     'db' => [
-        'host' => '127.0.0.1',
-        'port' => 3307,
-        'name' => 'edureports',
-        'user' => 'root',
-        'pass' => '',
-        'charset' => 'utf8mb4',
+        'host'    => $_ENV['DB_HOST'],
+        'port'    => $_ENV['DB_PORT'],
+        'name'    => $_ENV['DB_DATABASE'],
+        'user'    => $_ENV['DB_USERNAME'],
+        // Si la contraseña está vacía en el .env, esto devolverá una cadena vacía
+        'pass'    => $_ENV['DB_PASSWORD'] ?? '',
+        'charset' => $_ENV['DB_CHARSET'],
     ],
-    'base_url' => 'http://edureports.test',
-    'api_key' => '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',
-    ];
+    'base_url' => $_ENV['BASE_URL'],
+    'api_key'  => $_ENV['API_KEY'],
+];
