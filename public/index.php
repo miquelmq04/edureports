@@ -2,8 +2,6 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Carregar la configuració
-$config = require '../config/config.php';
 
 // Autoloader simple
 spl_autoload_register(function ($class) {
@@ -30,6 +28,9 @@ use Dotenv\Dotenv;
 // 2. Cargar el .env desde el directorio PADRE
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
+
+// Carregar la configuració
+$config = require '../config/config.php';
 
 // --- Resto de tu código ---
 
