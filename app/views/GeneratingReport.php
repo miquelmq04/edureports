@@ -1,18 +1,24 @@
 <link href="<?= base_url('css/styles.css') ?>" rel="stylesheet">
 <style>
     @keyframes progress {
-        0% { width: 0%; }
-        100% { width: 100%; }
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 100%;
+        }
     }
+
     .animate-progress {
         animation: progress 3s ease-out forwards;
     }
 </style>
 
 <div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-    
-    <div id="loadingContainer" url="<?= base_url('generate-report') ?>" class="w-full max-w-md text-center space-y-4">
-        
+
+    <div id="loadingContainer" data-url="<?= base_url('generate-report') ?>" class="w-full max-w-md text-center space-y-4">
+
         <div class="relative inline-block w-20 h-20 mx-auto">
             <div class="animate-spin rounded-full h-20 w-20 border-b-4 border-blue-600"></div>
             <div class="absolute inset-0 flex items-center justify-center">
@@ -37,4 +43,6 @@
     </div>
 </div>
 <script src="<?= base_url('js/funcions.js') ?>"></script>
-<script> document.addEventListener('DOMContentLoaded', initReportGeneration) </script>
+<script>
+    document.addEventListener('DOMContentLoaded', initReportGeneration)
+</script>
