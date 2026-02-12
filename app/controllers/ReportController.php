@@ -75,10 +75,21 @@ HTML;
         $reportData = $_SESSION['report_data'] ?? [];
         $generatedReport = $reportData['generated_report'] ?? '';
 
-        echo view('Header');
-        echo view('GeneratedReport', [
-            'reportData' => $reportData,
-            'generatedReport' => $generatedReport
-        ]);
+        $pageConfig = [
+            'page_title' => 'EduReports - Informes d\'Infantil amb IA',
+            'lang' => 'ca',
+            'body_class' => 'bg-gray-50 text-gray-900 font-sans antialiased',
+
+            // Vistes a carregar
+            'header_view' => 'Header',  // null per no mostrar header
+            'main_view' => 'GeneratedReport',
+            'footer_view' => 'Footer',   // null per no mostrar footer
+            'view_data' => [
+                'reportData' => $reportData,
+                'generatedReport' => $generatedReport
+            ],
+        ];
+
+        echo resource('DefaultPage', $pageConfig);
     }
 }

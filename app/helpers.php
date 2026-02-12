@@ -6,15 +6,30 @@
 function view($view, $data = [])
 {
     extract($data);
-    
+
     $view_path = __DIR__ . '/views/' . str_replace('.', '/', $view) . '.php';
-    
+
     if (!file_exists($view_path)) {
         return '<h1>Error: Vista no trobada</h1><p>' . htmlspecialchars($view_path) . '</p>';
     }
-    
+
     ob_start();
     require $view_path;
+    return ob_get_clean();
+}
+
+function resource($resource, $data = [])
+{
+    extract($data);
+
+    $resource_path = __DIR__ . '/resources/' . str_replace('.', '/', $resource) . '.php';
+
+    if (!file_exists($resource_path)) {
+        return '<h1>Error: Recurs no trobat</h1><p>' . htmlspecialchars($resource_path) . '</p>';
+    }
+
+    ob_start();
+    require $resource_path;
     return ob_get_clean();
 }
 

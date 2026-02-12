@@ -11,6 +11,7 @@ IMPORTANT - NORMES DE FORMAT:
 4. Redacta combinant la visió professional (tercera persona/impersonal) amb la proximitat del tutor.
 5. NO facis servir EMOJIS ni cap tipus d'icona. Només text.
 6. IDIOMA: És IMPRESCINDIBLE que redactis l'informe en l'idioma que s'indica al camp "language" del JSON. Si no s'indica, fes-ho en Català.
+7. L'informe anira adreçat a les families fes servir un vocabulari que es pugui entendre bé per algu de fora de l'àmbit de la pedagogia.
 
 ESTRUCTURA HTML I CLASSES OBLIGATÒRIES (Respecta escrupolosament les classes de Tailwind):
 
@@ -53,7 +54,7 @@ $userPrompt = "Dades de l'alumne: " . $reportDataJson;
 function sendMessageCloude($context, $userMessage)
 {
     // 1. CONFIGURACIÓN
-    $apiKey = ''; // <--- RECUERDA PONER TU API KEY AQUÍ
+    $apiKey = $_ENV['API_KEY']; 
     $url = 'https://api.anthropic.com/v1/messages';
 
     // 2. DATOS (Payload exacto del cURL)

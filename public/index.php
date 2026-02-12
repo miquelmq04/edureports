@@ -49,6 +49,10 @@ $router->post('/generate-report', ['App\\Controllers\\ReportController', 'proces
 $router->get('/generate-report', ['App\\Controllers\\ReportController', 'generateReport']);
 $router->get('/generated-report', ['App\\Controllers\\ReportController', 'showReport']);
 
+// Dashboard (nou sistema amb DashboardPage template)
+$router->get('/dashboard', ['App\\Controllers\\DashboardController', 'index']);
+
+$router->get('/dashboard/create-report', ['App\\Controllers\\WorkSpaceController', 'createReport']);
 // Servir la ruta solicitada 
 $response = $router->dispatch();
 echo $response;
