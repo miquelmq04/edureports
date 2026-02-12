@@ -12,7 +12,7 @@
                         Informes professionals en minuts, no hores
                     </div>
 
-                    <div class="h-[100px] md:h-[300px] flex flex-col justify-start">
+                    <div class="h-[100px] md:h-[320px] flex flex-col justify-start">
                         <h1 id="dynamicTitle" class="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight">
                             <span id="titlePart1" class="block">De les teves anotacions</span>
                             <span id="titlePart2" class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">a informes professionals.</span>

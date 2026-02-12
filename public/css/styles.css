@@ -1694,6 +1694,11 @@
       height: 300px;
     }
   }
+  .md\:h-\[320px\] {
+    @media (width >= 48rem) {
+      height: 320px;
+    }
+  }
   .md\:min-h-\[3\.5rem\] {
     @media (width >= 48rem) {
       min-height: 3.5rem;
